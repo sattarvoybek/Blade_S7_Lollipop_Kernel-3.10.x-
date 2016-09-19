@@ -1,0 +1,56 @@
+May 12 2015
+--------
+
+Overview
+    - further optimization by combine i2c read inside wrap filter function.
+        
+C-code
+1. vl6180x_api.c
+	- added _filter_Start_ext()
+
+
+Apr 28 2015
+--------
+
+Overview
+    - add dynamic delay time control.
+        
+C-code
+1. stmvl6180_module.c
+	- added sysfs control: set_delay_ms
+	- delayed the internal work handler lunch time based on the delay_ms data field.
+2. stmvl6180.h
+	- added delay_ms data field
+	
+Apr 24 2015
+--------
+
+Overview
+    - combine multiple i2c read transactions.
+        
+C-code
+
+1. vl6180x_api.h
+    -  VL6180x_RangeGetMeasurement_ext()
+    -  VL6180x_rangeGetResult_ext()
+    -  VL6180x_RdBuffer()
+       
+2. vl6180x_def.h
+    - VL6180x_RangeResultData_t data structure added.
+
+3. vl6180x_api.c
+    - add new implementation of the following functions
+	  	* _GetRateResult_ext()
+	  	* _filter_GetResult_ext()
+       	* VL6180x_RangeGetMeasurement_ext()
+		* VL6180x_RangeGetResult_ext()
+
+4. vl6180x_i2c.c
+    - add new implementation of the following function
+    		* VL6180x_RdBuffer()
+5. stmvl6180.h
+    - add rangeResult and ResultBuffer data field in stmvl6180_data data structure.
+
+6. stmvl6180_module.c
+    - added MULTI_READ definition
+    - call new extension functions when MULTI_READ is define 

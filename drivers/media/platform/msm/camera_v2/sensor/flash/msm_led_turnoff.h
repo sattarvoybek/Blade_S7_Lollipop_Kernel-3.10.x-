@@ -1,0 +1,1 @@
+void msm_flash_turnoff(void);
